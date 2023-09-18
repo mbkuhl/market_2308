@@ -107,7 +107,7 @@ RSpec.describe Market do
       @item5 = Item.new({name: "Chocolate Nice Cream", price: "$5.30"})
       expect(@market.sorted_item_list).to eq(["Banana Nice Cream", 'Peach', "Peach-Raspberry Nice Cream", 'Tomato'])
       @vendor2.stock(@item5, 5)
-      expect(@market.sorted_item_list).to eq(["Banana Nice Cream", "Chocololate Nice Cream", 'Peach', "Peach-Raspberry Nice Cream", 'Tomato'])
+      expect(@market.sorted_item_list).to eq(["Banana Nice Cream", "Chocolate Nice Cream", 'Peach', "Peach-Raspberry Nice Cream", 'Tomato'])
     end
   end
 end
