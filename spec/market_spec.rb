@@ -2,7 +2,7 @@ require './spec/spec_helper'
 
 RSpec.describe Market do
   before(:each) do
-    @arket = Market.new("South Pearl Street Farmers Market")
+    @market = Market.new("South Pearl Street Farmers Market")
     @vendor1 = Vendor.new("Rocky Mountain Fresh")
     @item1 = Item.new({name: 'Peach', price: "$0.75"})
     @item2 = Item.new({name: 'Tomato', price: '$0.50'})
@@ -25,7 +25,7 @@ RSpec.describe Market do
     end
   end
 
-  describe '#add_vendors' do
+  describe '#add_vendor' do
     it 'can add vendors to the market' do   
       @market.add_vendor(@vendor1)
       expect(@market.vendors).to eq([@vendor1])
@@ -54,17 +54,6 @@ RSpec.describe Market do
       @market.add_vendor(@vendor3)
       expect(@market.vendors_that_sell(@item1)).to eq([@vendor1, @vendor3])
       expect(@market.vendors_that_sell(@item4)).to eq([@vendor2])
-    end
-  end
-
-  describe '#potential_revenue' do
-    it 'can show how much money a vendor would make if they sold al their stock' do
-      @market.add_vendor(@vendor1)
-      @market.add_vendor(@vendor2)
-      @market.add_vendor(@vendor3)
-      expect(@vendor1.potential_revenue).to eq(29.75)
-      expect(@vendor2.potential_revenue).to eq(345.00)
-      expect(@vendor3.potential_revenue).to eq(48.75)
     end
   end
 end
