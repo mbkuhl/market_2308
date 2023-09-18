@@ -56,4 +56,58 @@ RSpec.describe Market do
       expect(@market.vendors_that_sell(@item4)).to eq([@vendor2])
     end
   end
+
+  describe '#total_inventory' do
+    it 'can return a list of all items sold in the market, how much total inventory there is, and where they are sold' do
+      @market.add_vendor(@vendor1)
+      @market.add_vendor(@vendor2)
+      @market.add_vendor(@vendor3)
+      expect(@market.total_inventory).to eq({
+        @item1 => {
+          quantity: 100,
+          vendors: [@vendor1, @vendor3]
+        },
+        @item2 => {
+          quantity: 7,
+          vendors: [@vendor1]
+        },
+        @item3 => {
+          quantity: 25,
+          vendors: [@vendor2]
+        },
+        @item4 => {
+          quantity: 50,
+          vendors: [@vendor2]
+        }
+      })
+    end
+  end
+
+  describe '#overstocked_items' do
+    it 'can give a list of overstocked items' do
+      @market.add_vendor(@vendor1)
+      @market.add_vendor(@vendor2)
+      @market.add_vendor(@vendor3)
+      expect(@market.overstocked_items).to eq([@item1])
+      @vendor2.stock(@item4, 1)
+      expect(@market.overstocked_items).to eq([@item1])
+      @vendor3.stock(@item4, 1)
+      expect(@market.overstocked_items).to eq([@item1, @item4])
+      @vendor3.stock(@item3, 1)
+      expect(@market.overstocked_items).to eq([@item1, @item4])
+      end
+  end
+
+  describe '#sorted_item_list' do
+    it 'can give a list of all items in stock, alphebetically' do
+      @market.add_vendor(@vendor1)
+      @market.add_vendor(@vendor2)
+      @market.add_vendor(@vendor3)
+      expect(@market.sorted_item_list).to eq(["Banana Nice Cream", 'Peach', "Peach-Raspberry Nice Cream", 'Tomato'])
+      @item5 = Item.new({name: "Chocolate Nice Cream", price: "$5.30"})
+      expect(@market.sorted_item_list).to eq(["Banana Nice Cream", 'Peach', "Peach-Raspberry Nice Cream", 'Tomato'])
+      @vendor2.stock(@item5, 5)
+      expect(@market.sorted_item_list).to eq(["Banana Nice Cream", "Chocololate Nice Cream", 'Peach', "Peach-Raspberry Nice Cream", 'Tomato'])
+    end
+  end
 end
