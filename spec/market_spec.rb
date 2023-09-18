@@ -139,13 +139,15 @@ RSpec.describe Market do
 
   describe '#date' do
     it 'can return the date in which the object was created' do
-      expect(@market.date).to be_a(Date)
+      expect(@market.date).to be_a(String)
+      allow(@market).to receive(:date).and_return('01/01/2000')
+      expect(@market.date).to eq('01/01/2000')
     end
 
-    it 'will save this date' do
-      market = double("Y2K")
-      allow(market).to receive(:date).and_return('01/01/2000')
-      expect(market.date).to eq('01/01/2000')
+    it 'will save this date (mock)' do
+      @market = double("Y2K")
+      allow(@market).to receive(:date).and_return('01/01/2000')
+      expect(@market.date).to eq('01/01/2000')
     end
   end
 
