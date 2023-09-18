@@ -7,6 +7,8 @@ RSpec.describe Item do
   end
   describe '#initialize' do
     it 'can initialize' do
+      expect(@item1).to be_a(Item)
+      expect(@item2).to be_a(Item)
       expect(@item2.name).to eq("Tomato")
       expect(@item2.price).to eq(0.5)
     end

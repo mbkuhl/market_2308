@@ -43,8 +43,8 @@ pry(main)> item2.name
 pry(main)> item2.price
 #=> 0.5
 
-pry(main)> vendor = Vendor.new("Rocky Mountain Fresh")
-#=> #<Vendor:0x00007f85683152f0...>
+pry(main)> 
+#=> #<Vendor:0x00007f85683152f0...>vendor = Vendor.new("Rocky Mountain Fresh")
 
 pry(main)> vendor.name
 #=> "Rocky Mountain Fresh"
