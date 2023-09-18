@@ -1,4 +1,4 @@
-require "date"
+require 'date'
 
 class Market
   attr_reader :name, :vendors
@@ -57,5 +57,19 @@ class Market
     end
   end
 
+  def sell(item, quantity)
+    return false if quantity > total_item_stock(item)
+    sellers = vendors_that_sell(item)
+    current_seller = 0
+    amount_needed = quantity
+    until sellers[current_seller].check_stock(item) > amount_needed
+      seller = sellers[current_seller]
+      amount_needed -= seller.check_stock(item)
+      seller.stock(item, -seller.check_stock(item))
+      current_seller= current_seller.next
+    end
+    sellers[current_seller].stock(item, -amount_needed)
+    true
+  end
 
 end
