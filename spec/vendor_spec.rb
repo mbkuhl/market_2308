@@ -10,7 +10,7 @@ RSpec.describe Vendor do
     it 'can initialize' do
       expect(@vendor).to be_a(Vendor)
       expect(@vendor.name).to eq("Rocky Mountain Fresh")
-      expect(@item2.inventory).to eq({})
+      expect(@vendor.inventory).to eq({})
     end
   end
 
