@@ -8,6 +8,11 @@ class Market
     @date = Date.today.strftime("%d/%m/%Y")
   end
   
+  # def format_date
+  #   date = 
+  #   date.
+  # end
+
   def add_vendor(vendor)
     @vendors << vendor
   end
